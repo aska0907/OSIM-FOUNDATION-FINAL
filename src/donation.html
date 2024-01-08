@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay with Card</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-icons-1.11.1/bootstrap-icons.css">
+<style>
+    .bi{
+      color: mediumpurple;
+    }
+</style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Pay with Card</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="amount" placeholder="Amount">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cardNumber" placeholder="Card Number" oninput="detectCardType(this)">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="cardTypeIcon"><i class="bi bi-credit-card-fill"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cvv">CVV</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="CVV">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardHolderName">Cardholder Name</label>
+                            <input type="text" class="form-control" id="cardHolderName" placeholder="Cardholder Name">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Pay Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function detectCardType(input) {
+        const cardNumber = input.value.replace(/\s/g, '');
+        let cardTypeIcon = document.getElementById('cardTypeIcon');
+        
+        if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(cardNumber)) {
+            cardTypeIcon.innerHTML = '<i class="fab fa-cc-visa"></i>';
+        } else if (/^5[1-5][0-9]{14}$/.test(cardNumber)) {
+            cardTypeIcon.innerHTML = '<i class="fab fa-cc-mastercard"></i>';
+        } else {
+            cardTypeIcon.innerHTML = '<i class="fa fa-credit-card"></i>';
+        }
+    }
+</script>
+</body>
+</html>
